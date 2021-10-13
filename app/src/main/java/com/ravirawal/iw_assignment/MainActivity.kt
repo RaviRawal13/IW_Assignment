@@ -1,6 +1,7 @@
 package com.ravirawal.iw_assignment
 
 import android.os.Bundle
+import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -19,15 +20,25 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-//        val appBarConfiguration = AppBarConfiguration(
-//            setOf(
-//                R.id.navigation_list, R.id.navigation_grid
-//            )
-//        )
-
-//        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        binding.topAppBar.setNavigationOnClickListener {
+            when (it.id) {
+                R.id.filter -> {
+                }
+                else -> {
+                }
+            }
+        }
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.filter -> {
+                    // Handle favorite icon press
+                    true
+                }
+
+                else -> false
+            }
+        }
     }
 }
