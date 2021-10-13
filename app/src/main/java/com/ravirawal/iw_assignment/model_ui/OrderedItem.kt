@@ -3,7 +3,6 @@ package com.ravirawal.iw_assignment.model_ui
 import android.os.Parcel
 import android.os.Parcelable
 import androidx.recyclerview.widget.DiffUtil
-import com.google.gson.annotations.SerializedName
 
 object OrderedItemDiffCallBack : DiffUtil.ItemCallback<OrderedItem>() {
     override fun areItemsTheSame(
