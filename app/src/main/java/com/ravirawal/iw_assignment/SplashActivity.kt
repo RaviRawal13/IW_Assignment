@@ -18,7 +18,6 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         super.onCreate(savedInstanceState)
-        supportActionBar?.hide()
         setContentView(SplashActivityBinding.inflate(layoutInflater).root)
     }
 
