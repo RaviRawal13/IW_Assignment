@@ -1,5 +1,6 @@
 package com.ravirawal.iw_assignment.utils
 
+import android.view.View
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import com.bumptech.glide.Glide
@@ -9,7 +10,7 @@ import com.ravirawal.iw_assignment.R
 fun ImageView.loadImage(url: String?) {
     Glide.with(this)
         .load(url ?: "")
-        .diskCacheStrategy(DiskCacheStrategy.ALL)
+        .diskCacheStrategy(DiskCacheStrategy.NONE)
         .fitCenter()
         .placeholder(R.drawable.ic_android_device)
         .error(R.drawable.ic_android_device)
@@ -29,4 +30,12 @@ fun String?.default(default: String? = null): String {
 
 inline fun <T : Any> T?.act(f: (it: T) -> Unit) {
     if (this != null) f(this)
+}
+
+fun View.visible() {
+    this.visibility = View.VISIBLE
+}
+
+fun View.gone() {
+    this.visibility = View.GONE
 }

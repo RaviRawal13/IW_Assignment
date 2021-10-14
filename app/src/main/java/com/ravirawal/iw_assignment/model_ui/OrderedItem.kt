@@ -19,18 +19,21 @@ object OrderedItemDiffCallBack : DiffUtil.ItemCallback<OrderedItem>() {
 data class OrderedItem(
     val extra: String?,
     val name: String?,
-    val price: String?
+    val price: String?,
+    val imageId: Int?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
-        parcel.readString()
+        parcel.readString(),
+        parcel.readInt()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(extra)
         parcel.writeString(name)
         parcel.writeString(price)
+        parcel.writeInt(imageId ?: 1)
     }
 
     override fun describeContents(): Int {
