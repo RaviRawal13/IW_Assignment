@@ -3,9 +3,12 @@ package com.ravirawal.iw_assignment.utils
 import android.view.View
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
+import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.findViewTreeLifecycleOwner
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ravirawal.iw_assignment.R
+import kotlinx.coroutines.*
 
 fun ImageView.loadImage(url: String?) {
     Glide.with(this)
@@ -38,4 +41,15 @@ fun View.visible() {
 
 fun View.gone() {
     this.visibility = View.GONE
+}
+
+fun View.delayOnLifeCycle(
+    durationInMillis: Long,
+    dispatcher: CoroutineDispatcher = Dispatchers.Main,
+    block: () -> Unit
+): Job? = findViewTreeLifecycleOwner()?.let { lifecycleOwner ->
+    lifecycleOwner.lifecycle.coroutineScope.launch(dispatcher) {
+        delay(durationInMillis)
+        block.invoke()
+    }
 }

@@ -65,5 +65,22 @@ class OrdersViewModel(
         }
     }
 
+    fun filterOrders(newText: String) {
+        val filteredOrders: List<OrderedItem>? = ordersRepository.cache?.data?.items?.filter {
+            it?.name?.contains(newText, true) ?: false
+        }?.mapIndexedNotNull { index, item ->
+            OrderedItem(
+                extra = item?.extra,
+                name = item?.name,
+                price = item?.price,
+                imageId = index
+            )
+        }
+
+        filteredOrders?.let {
+            ordersLiveData.value = it
+        }
+    }
+
 
 }

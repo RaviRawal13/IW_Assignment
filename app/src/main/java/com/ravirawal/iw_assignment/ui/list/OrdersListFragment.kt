@@ -55,8 +55,11 @@ class OrdersListFragment : Fragment(R.layout.fragment_orders_list) {
         binding.recyclerViewOrdersList.adapter = orderListAdapter
 
         ordersViewModel.ordersLiveData.observe(viewLifecycleOwner) {
-            when (it.first().name) {
-                LOADING -> {
+            when {
+                it.isEmpty() -> {
+                    orderListAdapter.differ.submitList(emptyList())
+                }
+                it.first().name == LOADING -> {
                     binding.recyclerViewOrdersList.gone()
                     startLoading()
                 }
