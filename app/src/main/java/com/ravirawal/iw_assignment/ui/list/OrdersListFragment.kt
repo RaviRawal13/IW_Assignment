@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ravirawal.iw_assignment.R
 import com.ravirawal.iw_assignment.databinding.FragmentOrdersListBinding
-import com.ravirawal.iw_assignment.model_ui.OrderedItem
 import com.ravirawal.iw_assignment.repository.OrdersRepository
 import com.ravirawal.iw_assignment.retrofit.ServiceHelper
 import com.ravirawal.iw_assignment.shared_vm.LOADING

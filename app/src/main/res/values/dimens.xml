@@ -12,4 +12,8 @@
 
     <dimen name="margin_vertical_order_item_list">12dp</dimen>
     <dimen name="margin_bottom_parent">4dp</dimen>
+    <dimen name="margin_parent_grid_item">10dp</dimen>
+    <dimen name="min_height_grid_item">120dp</dimen>
+    <dimen name="padding_horizontal_grid">8dp</dimen>
+
 </resources>
