@@ -17,7 +17,11 @@ import com.ravirawal.iw_assignment.utils.visible
 class OrderGridAdapter(private val onClick: (OrderedItem, Int) -> Unit = { _, _ -> run {} }) :
     RecyclerView.Adapter<OrderGridAdapter.OrderGridViewHolder>() {
 
-    val differ = AsyncListDiffer(this, OrderedItemDiffCallBack)
+    private val differ = AsyncListDiffer(this, OrderedItemDiffCallBack)
+
+    fun submitList(list: List<OrderedItem>) {
+        differ.submitList(list)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = OrderGridViewHolder(
         LayoutOrderItemGridBinding.inflate(

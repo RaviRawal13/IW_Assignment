@@ -57,16 +57,14 @@ class OrdersListFragment : Fragment(R.layout.fragment_orders_list) {
         ordersViewModel.ordersLiveData.observe(viewLifecycleOwner) {
             when {
                 it.isEmpty() -> {
-                    orderListAdapter.differ.submitList(emptyList())
+                    orderListAdapter.submitList(it)
                 }
                 it.first().name == LOADING -> {
-                    binding.recyclerViewOrdersList.gone()
                     startLoading()
                 }
                 else -> {
-                    binding.recyclerViewOrdersList.visible()
                     stopLoading()
-                    orderListAdapter.differ.submitList(it)
+                    orderListAdapter.submitList(it)
                 }
             }
         }
@@ -75,14 +73,16 @@ class OrdersListFragment : Fragment(R.layout.fragment_orders_list) {
     }
 
     private fun startLoading() {
+        binding.recyclerViewOrdersList.gone()
+
         (loading.shimmerSources).let {
             it.startShimmer()
             it.visible()
-
         }
     }
 
     private fun stopLoading() {
+        binding.recyclerViewOrdersList.visible()
         (loading.shimmerSources).let {
             it.gone()
             it.stopShimmer()

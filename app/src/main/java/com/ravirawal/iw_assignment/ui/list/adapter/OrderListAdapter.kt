@@ -8,7 +8,6 @@ import com.ravirawal.iw_assignment.databinding.LayoutOrderItemListBinding
 import com.ravirawal.iw_assignment.model_ui.OrderedItem
 import com.ravirawal.iw_assignment.model_ui.OrderedItemDiffCallBack
 import com.ravirawal.iw_assignment.retrofit.RANDOM_IMAGE_URL
-import com.ravirawal.iw_assignment.ui.grid.adapter.OrderGridAdapter
 import com.ravirawal.iw_assignment.utils.gone
 import com.ravirawal.iw_assignment.utils.loadImage
 import com.ravirawal.iw_assignment.utils.visible
@@ -16,7 +15,11 @@ import com.ravirawal.iw_assignment.utils.visible
 class OrderListAdapter(private val onClick: (OrderedItem, Int) -> Unit = { _, _ -> run {} }) :
     RecyclerView.Adapter<OrderListAdapter.OrderListViewHolder>() {
 
-    val differ = AsyncListDiffer(this, OrderedItemDiffCallBack)
+    private val differ = AsyncListDiffer(this, OrderedItemDiffCallBack)
+
+    fun submitList(list: List<OrderedItem>) {
+        differ.submitList(list)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = OrderListViewHolder(
         LayoutOrderItemListBinding.inflate(
@@ -31,7 +34,6 @@ class OrderListAdapter(private val onClick: (OrderedItem, Int) -> Unit = { _, _ 
     override fun onBindViewHolder(holder: OrderListViewHolder, position: Int) {
         holder.bind(differ.currentList[position], onClick)
     }
-
 
     inner class OrderListViewHolder(private val binding: LayoutOrderItemListBinding) :
         RecyclerView.ViewHolder(binding.root) {

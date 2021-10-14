@@ -58,10 +58,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText != null && newText.length > 2) {
-                    binding.searchViewOrdersMain.delayOnLifeCycle(400L) {
-                        onTextChanged(newText)
-                    }
+                binding.searchViewOrdersMain.delayOnLifeCycle(400L) {
+                    onTextChanged(newText ?: "")
                 }
                 return true
             }

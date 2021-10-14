@@ -1,11 +1,14 @@
 package com.ravirawal.iw_assignment.ui.grid
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ravirawal.iw_assignment.R
 import com.ravirawal.iw_assignment.databinding.FragmentOrdersGridBinding
+import com.ravirawal.iw_assignment.databinding.LoadingShimmerGridLayoutBinding
+import com.ravirawal.iw_assignment.databinding.LoadingShimmerListLayoutBinding
 import com.ravirawal.iw_assignment.repository.OrdersRepository
 import com.ravirawal.iw_assignment.retrofit.ServiceHelper
 import com.ravirawal.iw_assignment.shared_vm.LOADING
@@ -13,6 +16,8 @@ import com.ravirawal.iw_assignment.shared_vm.OrdersViewModelFactory
 import com.ravirawal.iw_assignment.shared_vm.OrdersViewModel
 import com.ravirawal.iw_assignment.ui.grid.adapter.OrderGridAdapter
 import com.ravirawal.iw_assignment.utils.GridSpacingItemDecoration
+import com.ravirawal.iw_assignment.utils.gone
+import com.ravirawal.iw_assignment.utils.visible
 
 const val SPAN_COUNT = 3
 const val INCLUDE_EDGE = true
@@ -28,6 +33,13 @@ class OrdersGridFragment : Fragment(R.layout.fragment_orders_grid) {
             OrdersRepository(
                 ServiceHelper.getAPIHelper()
             )
+        )
+    }
+
+    private val loading by lazy {
+        LoadingShimmerGridLayoutBinding.inflate(
+            LayoutInflater.from(binding.root.context),
+            binding.root
         )
     }
 
@@ -57,16 +69,37 @@ class OrdersGridFragment : Fragment(R.layout.fragment_orders_grid) {
         binding.recyclerViewOrdersGrid.adapter = orderListAdapter
 
         ordersViewModel.ordersLiveData.observe(viewLifecycleOwner) {
-            when (it.first().name) {
-                LOADING -> {
-
+            when {
+                it.isEmpty() -> {
+                    stopLoading()
+                    orderListAdapter.submitList(it)
+                }
+                it.first().name == LOADING -> {
+                    startLoading()
                 }
                 else -> {
-                    orderListAdapter.differ.submitList(it)
+                    stopLoading()
+                    orderListAdapter.submitList(it)
                 }
             }
         }
 
         ordersViewModel.fetchOrders()
+    }
+
+    private fun startLoading() {
+        binding.recyclerViewOrdersGrid.gone()
+        (loading.shimmerSources).let {
+            it.startShimmer()
+            it.visible()
+        }
+    }
+
+    private fun stopLoading() {
+        binding.recyclerViewOrdersGrid.visible()
+        (loading.shimmerSources).let {
+            it.gone()
+            it.stopShimmer()
+        }
     }
 }
