@@ -20,6 +20,17 @@ class OrdersViewModel(
 
     fun fetchOrders() {
         viewModelScope.launch {
+
+            ordersLiveData.value =
+                listOf(
+                    OrderedItem(
+                        name = LOADING,
+                        extra = LOADING,
+                        price = LOADING,
+                        imageId = 1
+                    )
+                )
+
             when (val ordersList: Result<OrdersListResponse> = ordersRepository.getOrdersList()) {
                 is Result.Success -> {
                     ordersLiveData.value =
