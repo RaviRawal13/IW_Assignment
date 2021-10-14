@@ -45,6 +45,7 @@ class OrdersGridFragment : Fragment(R.layout.fragment_orders_grid) {
         }
 
         val marginItem = resources.getDimension(R.dimen.margin_parent_grid_item).toInt()
+
         binding.recyclerViewOrdersGrid.addItemDecoration(
             GridSpacingItemDecoration(
                 SPAN_COUNT,

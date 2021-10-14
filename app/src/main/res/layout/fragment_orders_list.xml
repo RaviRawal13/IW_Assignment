@@ -11,11 +11,15 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/layout_order_item_list" />
+
+    <include
+        layout="@layout/loading_shimmer_list_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
