@@ -91,7 +91,7 @@ class OrdersUseCase(private val ordersRepository: OrdersRepository) {
         val sortType: String = when (sortOrder) {
             SORTING_CLEAR -> {
                 sortAsc = true
-                ""
+                ORDERED_ITEM_CLEAR
             }
 //            SORTING_PRICE_ASC -> {
 //                sortAsc = true
@@ -103,19 +103,19 @@ class OrdersUseCase(private val ordersRepository: OrdersRepository) {
 //            }
             SORTING_NAME_ASC -> {
                 sortAsc = true
-                "name"
+                ORDERED_ITEM_NAME
             }
             SORTING_NAME_DESC -> {
                 sortAsc = false
-                "name"
+                ORDERED_ITEM_NAME
             }
             SORTING_SAME_DAY_SHIPPING -> {
                 sortAsc = true
-                "extra"
+                ORDERED_ITEM_EXTRA
             }
             else -> {
                 sortAsc = true
-                ""
+                ORDERED_ITEM_CLEAR
             }
         }
 
