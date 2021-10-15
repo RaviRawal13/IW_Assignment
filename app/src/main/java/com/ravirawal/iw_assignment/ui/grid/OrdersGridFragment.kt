@@ -8,13 +8,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.ravirawal.iw_assignment.R
 import com.ravirawal.iw_assignment.databinding.FragmentOrdersGridBinding
 import com.ravirawal.iw_assignment.databinding.LoadingShimmerGridLayoutBinding
-import com.ravirawal.iw_assignment.databinding.LoadingShimmerListLayoutBinding
-import com.ravirawal.iw_assignment.repository.OrdersRepository
-import com.ravirawal.iw_assignment.retrofit.ServiceHelper
-import com.ravirawal.iw_assignment.shared_vm.LOADING
 import com.ravirawal.iw_assignment.shared_vm.OrdersViewModelFactory
 import com.ravirawal.iw_assignment.shared_vm.OrdersViewModel
 import com.ravirawal.iw_assignment.ui.grid.adapter.OrderGridAdapter
+import com.ravirawal.iw_assignment.usecase.LOADING
+import com.ravirawal.iw_assignment.usecase.OrdersUseCaseFactory
 import com.ravirawal.iw_assignment.utils.GridSpacingItemDecoration
 import com.ravirawal.iw_assignment.utils.gone
 import com.ravirawal.iw_assignment.utils.visible
@@ -30,9 +28,7 @@ class OrdersGridFragment : Fragment(R.layout.fragment_orders_grid) {
 
     private val ordersViewModelFactory by lazy {
         OrdersViewModelFactory(
-            OrdersRepository(
-                ServiceHelper.getAPIHelper()
-            )
+            OrdersUseCaseFactory.getOrdersUseCase()
         )
     }
 
